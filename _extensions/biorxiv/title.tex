@@ -7,7 +7,11 @@ $if(leadauthor)$
 \leadauthor{$leadauthor$}
 $else$
 $for(by-author/first)$
-\leadauthor{$by-author.name.family$$if(by-author.name.literal)$$by-author.name.literal$$endif$}
+$if(by-author.name.family)$
+\leadauthor{$by-author.name.family$}
+$else$
+\leadauthor{$by-author.name.literal$}
+$endif$
 $endfor$
 $endif$
 

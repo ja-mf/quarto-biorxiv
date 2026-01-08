@@ -21,19 +21,25 @@ After installation, use the format in your document:
 ```yaml
 ---
 title: "Your Paper Title"
-shorttitle: "Running title"
-leadauthor: "LastName"
+shorttitle: "Running title"  # Optional, defaults to title
+leadauthor: "LastName"        # Optional, defaults to first author's last name
 format:
   biorxiv-pdf: default
 author:
+  # Simple format (name as single string)
   - name: First Author
     affiliations:
       - ref: univ-a
     orcid: 0000-0001-0000-0000
-  - name: Second Author
+  # OR structured format (separate given/family names)
+  - name:
+      given: Jane
+      family: Smith
+    email: jane.smith@example.com
     affiliations:
       - ref: inst-b
     corresponding: true
+    orcid: 0000-0002-0000-0000
 affiliations:
   - id: univ-a
     name: University Name, City, Country
@@ -44,7 +50,7 @@ abstract: |
 keywords:
   - keyword1
   - keyword2
-corresponding-email: "author@email.com"
+corresponding-email: "author@email.com"  # Or use corresponding: true in author
 bibliography: references.bib
 ---
 ```
