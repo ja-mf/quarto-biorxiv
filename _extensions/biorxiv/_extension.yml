@@ -26,6 +26,28 @@ contributes:
       fig-cap-location: bottom
       tbl-cap-location: top
       tables: false
+    onecol:
+      documentclass: bioRxiv
+      classoption: []
+      pdf-engine: pdflatex
+      keep-tex: true
+      template-partials:
+        - title.tex
+        - before-body.tex
+        - _titlepage.tex
+      include-in-header:
+        - in-header.tex
+      format-resources:
+        - bioRxiv.cls
+        - bxvabbrvnat.bst
+        - orcidlink.sty
+        - bioRxiv_logo.png
+      cite-method: natbib
+      biblio-style: bxvabbrvnat
+      fig-pos: "htbp"
+      fig-cap-location: bottom
+      tbl-cap-location: top
+      tables: false
     submit:
       documentclass: bioRxiv
       classoption: [submit]

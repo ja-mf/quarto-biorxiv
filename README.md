@@ -57,11 +57,12 @@ bibliography: references.bib
 
 ## Format Options
 
-Two formats are available:
+Three formats are available:
 
 | Format | Description |
 |--------|-------------|
 | `biorxiv-pdf` | Two-column bioRxiv preprint style (default) |
+| `biorxiv-onecol` | Single-column bioRxiv preprint style (no line numbers) |
 | `biorxiv-submit` | Single-column submission style with line numbers |
 
 ### Additional Class Options
