@@ -1,0 +1,20 @@
+$if(shorttitle)$
+\shorttitle{$shorttitle$}
+$endif$
+$if(leadauthor)$
+\leadauthor{$leadauthor$}
+$endif$
+
+$if(title)$
+\title{$title$}
+$endif$
+
+$for(by-author)$
+\author[$for(by-author.affiliations)$$by-author.affiliations.number$$sep$,$endfor$$if(by-author.attributes.corresponding)$,\Letter$endif$]{$by-author.name.literal$$if(by-author.orcid)$ \orcidlink{$by-author.orcid$}$endif$}
+$endfor$
+
+$for(by-affiliation)$
+\affil[$by-affiliation.number$]{$by-affiliation.name$}
+$endfor$
+
+\date{}

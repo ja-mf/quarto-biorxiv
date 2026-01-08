@@ -1,0 +1,13 @@
+% Additional packages for bioRxiv template
+\usepackage{lipsum}
+
+% SI units setup
+\sisetup{range-units = single,
+        separate-uncertainty = true,
+        multi-part-units = single,
+        range-phrase = --}
+
+% Fix for authblk with Quarto
+\makeatletter
+\renewcommand\Authands{, and }
+\makeatother

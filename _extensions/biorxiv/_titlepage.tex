@@ -1,0 +1,20 @@
+% Titlepage partial - included in document
+\maketitle
+
+$if(abstract)$
+\begin{abstract}
+$abstract$
+\end{abstract}
+$endif$
+
+$if(keywords)$
+\begin{keywords}
+$for(keywords)$$keywords$$sep$ | $endfor$
+\end{keywords}
+$endif$
+
+$if(corresponding-email)$
+\begin{corrauthor}
+$corresponding-email$
+\end{corrauthor}
+$endif$

@@ -1,0 +1,128 @@
+---
+title: "Sample bioRxiv Preprint Article"
+shorttitle: "Sample Preprint"
+leadauthor: "Smith"
+# Format options:
+#   biorxiv-pdf: Two-column preprint style (default)
+#   biorxiv-submit: Single-column submission style with line numbers
+#
+# Additional classoptions available:
+#   watermark: Adds DRAFT watermark
+#   rmabstract: Non-bold abstract text
+#   bibskip: Add space between bibliography entries
+#
+# Example with options:
+#   format:
+#     biorxiv-pdf:
+#       classoption: [twocolumn, watermark]
+#   or for submission:
+#     biorxiv-submit: default
+format:
+  biorxiv-pdf: default
+author:
+  - name: Jane Smith
+    affiliations:
+      - ref: mit
+    orcid: 0000-0001-2345-6789
+  - name: John Doe
+    affiliations:
+      - ref: stanford
+    orcid: 0000-0002-3456-7890
+  - name: Alice Johnson
+    affiliations:
+      - ref: mit
+      - ref: stanford
+    orcid: 0000-0003-4567-8901
+    corresponding: true
+affiliations:
+  - id: mit
+    name: Massachusetts Institute of Technology, Cambridge, MA, USA
+  - id: stanford
+    name: Stanford University, Stanford, CA, USA
+abstract: |
+  This is a sample abstract demonstrating the bioRxiv Quarto extension. 
+  The abstract should provide a concise summary of the research, including
+  the main objectives, methods, results, and conclusions. This template
+  supports all standard bioRxiv formatting including two-column layout,
+  author affiliations, ORCID integration, and proper citation handling.
+keywords:
+  - quarto
+  - biorxiv
+  - preprint
+  - scientific publishing
+corresponding-email: "alice.johnson@mit.edu"
+bibliography: references.bib
+---
+
+## Introduction {#sec-introduction}
+
+This document demonstrates the bioRxiv Quarto extension for creating preprint-style manuscripts. The extension supports various configuration options inherited from the original LaTeX template.
+
+The central dogma of molecular biology describes the flow of genetic information [@crick_central_1970]. This foundational concept, along with the discovery of DNA structure [@watson_molecular_1953], revolutionized our understanding of genetics.
+
+## Results {#sec-results}
+
+### Experimental Findings
+
+Our analysis reveals several key findings that support the hypothesis. As shown in @fig-example, the experimental data demonstrates clear trends.
+
+![**Example experimental data.** (**A**) This figure demonstrates the bioRxiv figure formatting with proper caption styling. Scale bar represents 10 μm.](Figures/temp.png){#fig-example width="75%"}
+
+### Quantitative Analysis
+
+The quantitative analysis employed standard molecular biology techniques as described in @alberts_molecular_2002. Key measurements are summarized in the table below.
+
+```{=latex}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{l|c|c}
+         Condition & Mean $\pm$ SD & n \\
+         \hline
+         Control & 1.00 $\pm$ 0.12 & 24 \\
+         Treatment A & 1.45 $\pm$ 0.18 & 24 \\
+         Treatment B & 2.31 $\pm$ 0.25 & 24 \\
+    \end{tabular}
+    \caption{Quantitative measurements showing summary of experimental conditions with statistical measures.}
+    \label{tbl-results}
+\end{table}
+```
+
+### Mathematical Framework
+
+The relationship between variables can be expressed using standard equations. For example, enzyme kinetics follows the Michaelis-Menten equation (@eq-mm).
+
+$$
+v = \frac{V_{max}[S]}{K_m + [S]}
+$$ {#eq-mm}
+
+Where $v$ is the reaction velocity, $V_{max}$ is the maximum velocity, $[S]$ is substrate concentration, and $K_m$ is the Michaelis constant.
+
+## Discussion {#sec-discussion}
+
+The findings presented here demonstrate the utility of this bioRxiv Quarto extension for scientific manuscript preparation. The template faithfully reproduces the styling of the original LaTeX class while providing the authoring convenience of Quarto markdown.
+
+The genetic code discoveries [@brenner_uga:_1967] laid the groundwork for modern molecular biology, and tools like this extension help disseminate such findings efficiently.
+
+## Methods {#sec-methods}
+
+### Sample Preparation
+
+Samples were prepared according to standard protocols. All reagents were obtained from commercial sources unless otherwise noted.
+
+### Data Analysis
+
+Statistical analyses were performed using appropriate methods. Data are presented as mean ± standard deviation unless otherwise specified.
+
+## Acknowledgements {.unnumbered}
+
+We thank our colleagues for helpful discussions and feedback on this manuscript.
+
+## Author Contributions {.unnumbered}
+
+J.S. and J.D. conceived the project. A.J. performed the experiments and analysis. All authors contributed to writing the manuscript.
+
+## Competing Interests {.unnumbered}
+
+The authors declare no competing financial interests.
+
+## References {.unnumbered}
