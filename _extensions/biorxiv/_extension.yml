@@ -9,7 +9,6 @@ contributes:
       classoption: [twocolumn]
       pdf-engine: pdflatex
       keep-tex: true
-      wrap: preserve
       template-partials:
         - title.tex
         - before-body.tex
@@ -32,7 +31,6 @@ contributes:
       classoption: []
       pdf-engine: pdflatex
       keep-tex: true
-      wrap: preserve
       template-partials:
         - title.tex
         - before-body.tex
@@ -55,7 +53,6 @@ contributes:
       classoption: [submit]
       pdf-engine: pdflatex
       keep-tex: true
-      wrap: preserve
       template-partials:
         - title.tex
         - before-body.tex
