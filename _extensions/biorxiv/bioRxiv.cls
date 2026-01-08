@@ -36,7 +36,7 @@
 \DeclareOption{times}{\@timestrue}
 \DeclareOption{helvet}{\@helvettrue}
 \DeclareOption{twocolumn}{\@tmptwocolumntrue}
-%\DeclareOption{onecolumn}{\@tmptwocolumnfalse}
+\DeclareOption{onecolumn}{\@tmptwocolumnfalse}
 \DeclareOption{submit}{\@submittrue \@tmptwocolumnfalse}
 
 \ProcessOptions
@@ -435,7 +435,11 @@
 \if@submit
     \onecolumn \sloppy \flushbottom
 \else
-    \twocolumn \sloppy \flushbottom
+    \if@tmptwocolumn
+        \twocolumn \sloppy \flushbottom
+    \else
+        \onecolumn \sloppy \flushbottom
+    \fi
 \fi
 
 %% Allows BIOGRAPHY and leaves place for picture
