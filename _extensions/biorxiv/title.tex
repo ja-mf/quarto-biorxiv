@@ -1,8 +1,14 @@
 $if(shorttitle)$
 \shorttitle{$shorttitle$}
+$else$
+\shorttitle{$title$}
 $endif$
 $if(leadauthor)$
 \leadauthor{$leadauthor$}
+$else$
+$for(by-author/first)$
+\leadauthor{$by-author.name.family$$if(by-author.name.literal)$$by-author.name.literal$$endif$}
+$endfor$
 $endif$
 
 $if(title)$
@@ -10,7 +16,7 @@ $if(title)$
 $endif$
 
 $for(by-author)$
-\author[$for(by-author.affiliations)$$by-author.affiliations.number$$sep$,$endfor$$if(by-author.attributes.corresponding)$,\Letter$endif$]{$by-author.name.literal$$if(by-author.orcid)$ \orcidlink{$by-author.orcid$}$endif$}
+\author[$for(by-author.affiliations)$$by-author.affiliations.number$$sep$,$endfor$$if(by-author.attributes.corresponding)$,\Letter$endif$]{$if(by-author.name.literal)$$by-author.name.literal$$else$$by-author.name.given$ $by-author.name.family$$endif$$if(by-author.orcid)$ \orcidlink{$by-author.orcid$}$endif$}
 $endfor$
 
 $for(by-affiliation)$
