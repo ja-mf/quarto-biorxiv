@@ -514,7 +514,13 @@
 
 
 \lfoot[\bBioRXiv]{\dAuthor}
-\rfoot[\dAuthor]{\cBioRXiv}
+\if@submit
+  \rfoot[\dAuthor]{\cBioRXiv}
+\else
+  \rfoot[\dAuthor]{{\footnotesize
+      \footerfont \includegraphics[width=1cm, trim=0 1.5cm 0 0]{bioRxiv_logo}\hspace{7pt}|\hspace{7pt}\thepage\textendash\pageref{LastPage}
+    }}
+\fi
 
 \rhead[]{\footnotesize\rightmark}
 \lhead[\footnotesize\leftmark]{}
