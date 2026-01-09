@@ -128,6 +128,27 @@ format:
     classoption: [onecolumn]
 ```
 
+### Using the Makefile
+
+The template includes a `Makefile` for easily rendering different formats without modifying your YAML:
+
+```bash
+make           # Render two-column format (default)
+make twocolumn # Render two-column format  
+make onecolumn # Render single-column format
+make submit    # Render submission format with line numbers
+make all       # Render all three formats
+make clean     # Remove generated PDFs
+make help      # Show usage information
+```
+
+The Makefile automatically detects your `.qmd` file and generates appropriately named PDFs:
+- `yourfile-twocolumn.pdf` - Two-column preprint
+- `yourfile-onecolumn.pdf` - Single-column
+- `yourfile-submit.pdf` - Submission format with line numbers
+
+This is useful for maintaining multiple output formats without switching YAML configurations.
+
 ### Column-Spanning Figures
 
 Use the `fig-env` attribute for figures that span both columns:
