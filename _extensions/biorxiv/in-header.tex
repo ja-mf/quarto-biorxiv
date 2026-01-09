@@ -11,3 +11,34 @@
 \makeatletter
 \renewcommand\Authands{, and }
 \makeatother
+
+% Abstract spanning environment for two-column mode
+\makeatletter
+\newenvironment{abstractspan}{%
+  \if@tmptwocolumn
+    \twocolumn[\@maketitle
+    \vspace{1em}
+    \noindent{\sffamily\bfseries\large Abstract}\par\vspace{0.5em}
+    \noindent\small
+  \else
+    \@maketitle
+    \vspace{1em}
+    \noindent{\sffamily\bfseries\large Abstract}\par\vspace{0.5em}
+    \noindent\small
+  \fi
+}{%
+  \if@tmptwocolumn
+    \vspace{1em}]
+  \else
+    \vspace{1em}\par
+  \fi
+}
+
+\newenvironment{authorsummaryspan}{%
+  \vspace{0.5em}
+  \noindent{\sffamily\bfseries\large Author Summary}\par\vspace{0.5em}
+  \noindent\small
+}{%
+  \vspace{1em}\par
+}
+\makeatother

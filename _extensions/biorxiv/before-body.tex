@@ -1,20 +1,28 @@
-% Before body content - maketitle and abstract
-\maketitle
+% Before body content
+% Note: maketitle is called by abstractspan environment or explicitly if no abstract
 
 $if(abstract)$
-\begin{abstract}
+\begin{abstractspan}
 $abstract$
-\end{abstract}
+\end{abstractspan}
+$elseif(keywords)$
+\maketitle
+$else$
+\maketitle
 $endif$
 
 $if(keywords)$
-\begin{keywords}
-$for(keywords)$$keywords$$sep$ | $endfor$
-\end{keywords}
+\noindent{\sffamily\bfseries\footnotesize Keywords:} {\footnotesize $for(keywords)$$keywords$$sep$ | $endfor$}
+\vspace{0.5em}\par
+$endif$
+
+$if(author-summary)$
+\begin{authorsummaryspan}
+$author-summary$
+\end{authorsummaryspan}
 $endif$
 
 $if(corresponding-email)$
-\begin{corrauthor}
-$corresponding-email$
-\end{corrauthor}
+\noindent{\footnotesize Correspondence: \textit{$corresponding-email$}}
+\vspace{0.5em}\par
 $endif$
