@@ -53,11 +53,9 @@ quarto use template ja-mf/quarto-biorxiv
 ---
 title: "Your Paper Title"
 format:
-  biorxiv-pdf: default          # Two-column preprint format (default)
-  # biorxiv-submit: default     # Single-column submission format with line numbers
-  # biorxiv-pdf:                # Alternative: use class options to switch formats
-  #   classoption: [onecolumn]  # Single-column without line numbers
-  #   classoption: [submit]     # Submission format with line numbers
+  biorxiv-pdf: default          # Two-column preprint format
+  # biorxiv-pdf:                # Uncomment for submission format:
+  #   classoption: [submit]     # Single-column with line numbers
 author:
   - name: First Author
     affiliations:
@@ -114,19 +112,20 @@ format:
   biorxiv-pdf: default
 ```
 
-Single-column layout:
+Submission format with line numbers (single-column):
+
+```yaml
+format:
+  biorxiv-pdf:
+    classoption: [submit]
+```
+
+Alternative single-column layout without line numbers:
 
 ```yaml
 format:
   biorxiv-pdf:
     classoption: [onecolumn]
-```
-
-Submission format with line numbers:
-
-```yaml
-format:
-  biorxiv-submit: default
 ```
 
 ### Column-Spanning Figures

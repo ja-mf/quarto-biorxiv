@@ -3,11 +3,9 @@ title: "Sample bioRxiv Preprint Article"
 shorttitle: "Sample Preprint"
 leadauthor: "Smith"
 format:
-  biorxiv-pdf: default          # Two-column preprint format (default)
-  # biorxiv-submit: default     # Single-column submission format with line numbers
-  # biorxiv-pdf:                # Alternative: use class options to switch formats
-  #   classoption: [onecolumn]  # Single-column without line numbers
-  #   classoption: [submit]     # Submission format with line numbers
+  biorxiv-pdf: default          # Two-column preprint format
+  # biorxiv-pdf:                # Uncomment for submission format:
+  #   classoption: [submit]     # Single-column with line numbers
 author:
   - name: Jane Smith
     affiliations:
