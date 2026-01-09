@@ -2,6 +2,9 @@
 -- Parses #### Abstract and #### Author Summary sections
 -- Extracts them from body and formats with keywords
 -- Configurable: abstract-span: true/false (default: true) controls if abstract spans columns
+--
+-- For column-spanning figures, use Quarto's built-in fig-env attribute:
+--   ![caption](image.png){#fig-id fig-env="figure*"}
 
 local abstract_blocks = pandoc.List()
 local author_summary_blocks = pandoc.List()

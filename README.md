@@ -114,6 +114,7 @@ Available class options:
 
 - Two-column bioRxiv preprint style
 - Single-column submission style with line numbers
+- Column-spanning figures with `fig-env="figure*"`
 - ORCID integration
 - Author affiliations with superscript numbering
 - Corresponding author indication (marked with ✉)
@@ -121,6 +122,16 @@ Available class options:
 - natbib citation support (author-year style)
 - bioRxiv logo in footer
 - Proper SI units support via siunitx
+
+### Column-Spanning Figures
+
+In two-column mode, figures normally fit within a single column. To make a figure span both columns, add `fig-env="figure*"` to the figure attributes:
+
+```markdown
+![Your caption here](path/to/image.png){#fig-id fig-env="figure*"}
+```
+
+This attribute is LaTeX-specific and will be ignored when rendering to HTML or DOCX, so your document remains compatible with all output formats.
 
 ## Template Files
 
