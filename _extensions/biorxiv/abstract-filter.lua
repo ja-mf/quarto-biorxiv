@@ -3,11 +3,60 @@
 -- Extracts them from body and formats with keywords
 -- Configurable: abstract-span: true/false (default: true) controls if abstract spans columns
 --
+-- Footer options:
+--   footer-logo: "biorxiv" (default) | "Custom Text" | false
+--   footer-date: true (default, shows \today) | "Custom Text" | false
+--
 -- For column-spanning figures, use Quarto's built-in fig-env attribute:
 --   ![caption](image.png){#fig-id fig-env="figure*"}
 
 local abstract_blocks = pandoc.List()
 local author_summary_blocks = pandoc.List()
+
+-- Process footer options and return LaTeX commands
+local function process_footer_options(meta)
+  local latex_commands = pandoc.List()
+  
+  -- Process footer-logo option
+  if meta['footer-logo'] ~= nil then
+    local logo_val = meta['footer-logo']
+    if type(logo_val) == "boolean" then
+      if not logo_val then
+        latex_commands:insert(pandoc.RawBlock('latex', '\\hidefooterlogo'))
+      end
+      -- true means use default (bioRxiv logo)
+    elseif type(logo_val) == "table" then
+      local logo_str = pandoc.utils.stringify(logo_val)
+      if logo_str:lower() == "false" then
+        latex_commands:insert(pandoc.RawBlock('latex', '\\hidefooterlogo'))
+      elseif logo_str:lower() ~= "biorxiv" and logo_str ~= "" then
+        latex_commands:insert(pandoc.RawBlock('latex', '\\setfooterlogo{' .. logo_str .. '}'))
+      end
+      -- "biorxiv" means use default
+    end
+  end
+  
+  -- Process footer-date option
+  if meta['footer-date'] ~= nil then
+    local date_val = meta['footer-date']
+    if type(date_val) == "boolean" then
+      if not date_val then
+        latex_commands:insert(pandoc.RawBlock('latex', '\\hidefooterdate'))
+      end
+      -- true means use default (\today)
+    elseif type(date_val) == "table" then
+      local date_str = pandoc.utils.stringify(date_val)
+      if date_str:lower() == "false" then
+        latex_commands:insert(pandoc.RawBlock('latex', '\\hidefooterdate'))
+      elseif date_str:lower() ~= "true" and date_str ~= "" then
+        latex_commands:insert(pandoc.RawBlock('latex', '\\setfooterdate{' .. date_str .. '}'))
+      end
+      -- "true" means use default
+    end
+  end
+  
+  return latex_commands
+end
 
 function Pandoc(doc)
   local new_blocks = pandoc.List()
@@ -151,6 +200,14 @@ function Pandoc(doc)
     if keywords_str ~= "" then
       opening_blocks:insert(pandoc.RawBlock('latex', '\\vspace{0.5em}\\noindent{\\sffamily\\bfseries\\footnotesize Keywords:} {\\footnotesize ' .. keywords_str .. '}\\par'))
     end
+  end
+  
+  -- Process footer options (logo and date)
+  local footer_commands = process_footer_options(doc.meta)
+  
+  -- Prepend footer commands first (before abstract)
+  for i = #footer_commands, 1, -1 do
+    new_blocks:insert(1, footer_commands[i])
   end
   
   -- Prepend abstract blocks to document

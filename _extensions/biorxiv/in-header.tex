@@ -13,18 +13,29 @@
 \makeatother
 
 % Footer customization options
-% These can be set via YAML: show-logo: false, show-date: false
+% logo: "biorxiv" (default) shows bioRxiv logo, any other string shows that text, false hides it
+% date: true (default) shows \today, a string shows that text, false hides it
+\makeatletter
+\newcommand{\@footerlogocontent}{\includegraphics[width=1cm, trim=0 1.5cm 0 0]{bioRxiv_logo}}
+\newcommand{\@footerdatecontent}{\today}
 \newif\ifshowlogo
 \newif\ifshowdate
-\showlogotrue  % default: show logo
-\showdatetrue  % default: show date
+\showlogotrue
+\showdatetrue
 
-% Override footer definitions to respect show-logo and show-date options
+% Commands to set footer content from template
+\newcommand{\setfooterlogo}[1]{\renewcommand{\@footerlogocontent}{#1}}
+\newcommand{\setfooterdate}[1]{\renewcommand{\@footerdatecontent}{#1}}
+\newcommand{\hidefooterlogo}{\showlogofalse}
+\newcommand{\hidefooterdate}{\showdatefalse}
+\makeatother
+
+% Override footer definitions to use customizable content
 \makeatletter
 \AtBeginDocument{%
   % Redefine footer macros with conditional logo and date
-  \def\@footerlogo{\ifshowlogo\includegraphics[width=1cm, trim=0 1.5cm 0 0]{bioRxiv_logo}\hspace{7pt}|\hspace{7pt}\fi}%
-  \def\@footerdate{\ifshowdate\today\hspace{7pt}|\hspace{7pt}\fi}%
+  \def\@footerlogo{\ifshowlogo\@footerlogocontent\hspace{7pt}|\hspace{7pt}\fi}%
+  \def\@footerdate{\ifshowdate\@footerdatecontent\hspace{7pt}|\hspace{7pt}\fi}%
   %
   % First page footer (right side)
   \if@submit

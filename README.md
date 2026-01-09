@@ -112,13 +112,20 @@ Available class options:
 
 ### Footer Options
 
-The footer displays the lead author, bioRxiv logo, date, and page range by default. You can hide the logo or date:
+The footer displays the lead author, bioRxiv logo, date, and page range by default. You can customize or hide these elements:
 
 ```yaml
-format:
-  biorxiv-pdf:
-    hide-logo: true   # Hides the bioRxiv logo from the footer
-    hide-date: true   # Hides the date from the footer
+---
+# Footer logo options
+footer-logo: biorxiv        # Default: shows bioRxiv logo
+footer-logo: "PREPRINT"     # Custom text instead of logo
+footer-logo: false          # Hide logo entirely
+
+# Footer date options  
+footer-date: true           # Default: shows today's date
+footer-date: "January 2026" # Custom date text
+footer-date: false          # Hide date entirely
+---
 ```
 
 ## Features
