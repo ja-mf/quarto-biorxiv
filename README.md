@@ -175,11 +175,22 @@ Available options:
 
 ## Template Files
 
-The extension includes:
+When you use this template, you get:
 
 - `template.qmd` - Example manuscript
 - `references.bib` - Example bibliography
 - `Figures/` - Directory for figures
+- `gitignore-template` - Recommended `.gitignore` file (rename to `.gitignore`)
+
+During rendering, Quarto automatically copies required LaTeX files (`.cls`, `.sty`, `.bst`, logo) to your project directory. These files are needed by LaTeX but can clutter your project. The provided `gitignore-template` excludes them from version control.
+
+**Recommended setup:**
+```bash
+mv gitignore-template .gitignore
+git init
+git add .
+git commit -m "Initial commit"
+```
 
 ## Credits
 

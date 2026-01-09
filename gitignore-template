@@ -1,0 +1,14 @@
+# Quarto output
+*.pdf
+*.tex
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+
+# LaTeX support files (auto-copied by Quarto during render)
+bioRxiv.cls
+bioRxiv_logo.png
+bxvabbrvnat.bst
+orcidlink.sty
