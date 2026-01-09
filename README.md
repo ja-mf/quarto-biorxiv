@@ -45,15 +45,40 @@ affiliations:
     name: University Name, City, Country
   - id: inst-b
     name: Institute Name, City, Country
-abstract: |
-  Your abstract goes here.
 keywords:
   - keyword1
   - keyword2
 corresponding-email: "author@email.com"  # Or use corresponding: true in author
 bibliography: references.bib
 ---
+
+#### Abstract
+
+Your abstract text goes here. In two-column mode, this will automatically span both columns.
+
+#### Author Summary
+
+Optional author summary text. This section is also recognized and formatted appropriately.
+
+## Introduction
+
+Your manuscript content starts here...
 ```
+
+### Abstract Placement
+
+The extension uses a Lua filter to parse `#### Abstract` and `#### Author Summary` sections from your document body (not YAML). This provides better control over formatting and allows the abstract to span both columns in two-column mode.
+
+To control abstract placement:
+
+```yaml
+format:
+  biorxiv-pdf:
+    abstract-span: true   # Default: abstract spans both columns in two-column mode
+    # abstract-span: false  # Places abstract in left column only
+```
+
+Note: The `abstract` field in YAML is ignored in favor of the `#### Abstract` section in the document body.
 
 ## Format Options
 

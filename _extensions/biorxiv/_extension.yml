@@ -9,6 +9,8 @@ contributes:
       classoption: [twocolumn]
       pdf-engine: pdflatex
       keep-tex: true
+      filters:
+        - abstract-filter.lua
       template-partials:
         - title.tex
         - before-body.tex
@@ -28,9 +30,11 @@ contributes:
       tables: false
     onecol:
       documentclass: bioRxiv
-      classoption: []
+      classoption: [onecolumn]
       pdf-engine: pdflatex
       keep-tex: true
+      filters:
+        - abstract-filter.lua
       template-partials:
         - title.tex
         - before-body.tex
@@ -53,6 +57,8 @@ contributes:
       classoption: [submit]
       pdf-engine: pdflatex
       keep-tex: true
+      filters:
+        - abstract-filter.lua
       template-partials:
         - title.tex
         - before-body.tex

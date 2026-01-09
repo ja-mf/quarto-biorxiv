@@ -1,28 +1,5 @@
 % Before body content
-% Note: maketitle is called by abstractspan environment or explicitly if no abstract
+% Abstract, Author Summary, and Keywords are handled by abstract-filter.lua
+% which parses #### Abstract and #### Author Summary from document body
 
-$if(abstract)$
-\begin{abstractspan}
-$abstract$
-\end{abstractspan}
-$elseif(keywords)$
-\maketitle
-$else$
-\maketitle
-$endif$
-
-$if(keywords)$
-\noindent{\sffamily\bfseries\footnotesize Keywords:} {\footnotesize $for(keywords)$$keywords$$sep$ | $endfor$}
-\vspace{0.5em}\par
-$endif$
-
-$if(author-summary)$
-\begin{authorsummaryspan}
-$author-summary$
-\end{authorsummaryspan}
-$endif$
-
-$if(corresponding-email)$
-\noindent{\footnotesize Correspondence: \textit{$corresponding-email$}}
-\vspace{0.5em}\par
-$endif$
+% Everything is handled by the filter - nothing needed here
