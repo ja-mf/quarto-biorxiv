@@ -36,7 +36,7 @@
 \DeclareOption{times}{\@timestrue}
 \DeclareOption{helvet}{\@helvettrue}
 \DeclareOption{twocolumn}{\@tmptwocolumntrue}
-%\DeclareOption{onecolumn}{\@tmptwocolumnfalse}
+\DeclareOption{onecolumn}{\@tmptwocolumnfalse}
 \DeclareOption{submit}{\@submittrue \@tmptwocolumnfalse}
 
 \ProcessOptions
@@ -336,15 +336,43 @@
   \begingroup
   \def\thefootnote{} % the \thanks{} mark type is empty
 \if@tmptwocolumn
-  \twocolumn[\@maketitle]
+  \twocolumn[\@maketitle\@abstractblock]
 \else
 %  \@maketitle % for some reason tmptwocolumn is not declared so this is a fix
   \@maketitle
+  \@abstractblock
 \fi
   \thispagestyle{plain}\@thanks
   \endgroup
   \setcounter{footnote}{0}\let\maketitle\relax\let\@maketitle\relax
   \gdef\@thanks{}\gdef\@author{}\gdef\@title{}\let\thanks\relax
+}
+
+%% Storage for abstract content
+\newcommand{\@abstracttext}{}
+\newcommand{\@authorsummarytext}{}
+\newcommand{\@keywordstext}{}
+\newif\if@hasauthorsummary \@hasauthorsummaryfalse
+\newif\if@haskeywords \@haskeywordsfalse
+
+%% Abstract block that spans columns
+\def\@abstractblock{%
+  \ifx\@abstracttext\empty\else
+    \vspace{1em}
+    \noindent{\sffamily\bfseries Abstract}\par\vspace{0.5em}
+    \noindent\small\@abstracttext
+    \vspace{0.5em}\par
+  \fi
+  \if@haskeywords
+    \noindent{\sffamily\bfseries\footnotesize Keywords:} {\footnotesize\@keywordstext}
+    \vspace{0.5em}\par
+  \fi
+  \if@hasauthorsummary
+    \vspace{0.5em}
+    \noindent{\sffamily\bfseries Author Summary}\par\vspace{0.5em}
+    \noindent\small\@authorsummarytext
+    \vspace{1em}\par
+  \fi
 }
 
 \if@submit
@@ -389,15 +417,14 @@
     \end{flushleft}
       \par\vskip 1.4em}
 
-  %% Abstract and keywords
-  \def\abstract{%\vspace{-.3em}
-    \ifbfabstract\normalsize\bfseries\else\small\fi}
+  %% Abstract and keywords - redefine to collect content
+  \long\def\abstract#1\end{\gdef\@abstracttext{#1}\end}
+  
+  %% Author summary environment
+  \long\def\authorsummary#1\end{\gdef\@authorsummarytext{#1}\@hasauthorsummarytrue\end}
 
-  \def\endabstract{\vspace{1.0em}\par\normalsize}
-
-  \def\keywords{%\vspace{-.3em}
-  \ifbfabstract\Affilfont\bfseries\else\footnotesize\fi}
-  \def\endkeywords{\vspace{0.3em}\par\normalsize}
+  %% Keywords - collect content
+  \long\def\keywords#1\end{\gdef\@keywordstext{#1}\@haskeywordstrue\end}
 
   \newcommand{\at}{\makeatletter @\makeatother}
   \def\corrauthor{%\vspace{-.3em}
@@ -435,7 +462,11 @@
 \if@submit
     \onecolumn \sloppy \flushbottom
 \else
-    \twocolumn \sloppy \flushbottom
+    \if@tmptwocolumn
+        \twocolumn \sloppy \flushbottom
+    \else
+        \onecolumn \sloppy \flushbottom
+    \fi
 \fi
 
 %% Allows BIOGRAPHY and leaves place for picture
@@ -514,7 +545,13 @@
 
 
 \lfoot[\bBioRXiv]{\dAuthor}
-\rfoot[\dAuthor]{\cBioRXiv}
+\if@submit
+  \rfoot[\dAuthor]{\cBioRXiv}
+\else
+  \rfoot[\dAuthor]{{\footnotesize
+      \footerfont \includegraphics[width=1cm, trim=0 1.5cm 0 0]{bioRxiv_logo}\hspace{7pt}|\hspace{7pt}\thepage\textendash\pageref{LastPage}
+    }}
+\fi
 
 \rhead[]{\footnotesize\rightmark}
 \lhead[\footnotesize\leftmark]{}

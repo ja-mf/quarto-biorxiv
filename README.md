@@ -2,6 +2,14 @@
 
 Quarto extension for bioRxiv-style preprint manuscripts, based on the LaTeX template from [quantixed/manuscript-templates](https://github.com/quantixed/manuscript-templates).
 
+## Preview
+
+| Two-column (default) | Submission format |
+|:---:|:---:|
+| ![biorxiv-pdf](template-biorxiv-pdf-preview.png) | ![biorxiv-submit](template-biorxiv-submit-preview.png) |
+
+Sample PDFs: [two-column](template-biorxiv-pdf.pdf) | [submission](template-biorxiv-submit.pdf)
+
 ## Features
 
 ### Original Template Features
@@ -25,8 +33,16 @@ Quarto extension for bioRxiv-style preprint manuscripts, based on the LaTeX temp
 
 ## Installation
 
+### Add to Existing Project
+
 ```bash
 quarto add ja-mf/quarto-biorxiv
+```
+
+### Create New Project
+
+```bash
+quarto use template ja-mf/quarto-biorxiv
 ```
 
 ## Usage
