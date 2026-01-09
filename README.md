@@ -1,166 +1,171 @@
 # bioRxiv Quarto Format
 
-A Quarto extension that provides a bioRxiv-style preprint format for scientific manuscripts.
+Quarto extension for bioRxiv-style preprint manuscripts, based on the LaTeX template from [quantixed/manuscript-templates](https://github.com/quantixed/manuscript-templates).
 
-This is a port of the [quantixed/manuscript-templates](https://github.com/quantixed/manuscript-templates) LaTeX template to Quarto.
+## Features
+
+### Original Template Features
+
+- Two-column bioRxiv preprint layout
+- Single-column submission format with line numbers
+- Author affiliations with superscript numbering
+- ORCID integration
+- bioRxiv logo in footer
+- natbib citation support with author-year style
+- Proper SI units support via siunitx
+
+### Quarto Extension Features
+
+- In-document abstract and author summary parsing
+- Abstract spanning across columns in two-column mode
+- Column-spanning figures via `fig-env` attribute
+- Customizable footer logo and date
+- Single-column mode via class options
+- Cross-format compatibility (HTML, DOCX, PDF)
 
 ## Installation
-
-To use this extension in your project, run:
 
 ```bash
 quarto add ja-mf/quarto-biorxiv
 ```
 
-This will install the extension under the `_extensions` subdirectory and provide a template file that you can use as a starting point for your article.
-
 ## Usage
 
-After installation, use the format in your document:
+### Basic Setup
 
 ```yaml
 ---
 title: "Your Paper Title"
-shorttitle: "Running title"  # Optional, defaults to title
-leadauthor: "LastName"        # Optional, defaults to first author's last name
 format:
   biorxiv-pdf: default
 author:
-  # Simple format (name as single string)
   - name: First Author
     affiliations:
-      - ref: univ-a
+      - ref: inst-a
     orcid: 0000-0001-0000-0000
-  # OR structured format (separate given/family names)
   - name:
       given: Jane
       family: Smith
-    email: jane.smith@example.com
     affiliations:
       - ref: inst-b
     corresponding: true
-    orcid: 0000-0002-0000-0000
 affiliations:
-  - id: univ-a
+  - id: inst-a
     name: University Name, City, Country
   - id: inst-b
     name: Institute Name, City, Country
 keywords:
   - keyword1
   - keyword2
-corresponding-email: "author@email.com"  # Or use corresponding: true in author
 bibliography: references.bib
 ---
 
 #### Abstract
 
-Your abstract text goes here. In two-column mode, this will automatically span both columns.
+Your abstract text here.
 
 #### Author Summary
 
-Optional author summary text. This section is also recognized and formatted appropriately.
+Optional author summary text.
 
 ## Introduction
 
-Your manuscript content starts here...
+Manuscript content starts here.
 ```
 
-### Abstract Placement
+### Abstract and Keywords
 
-The extension uses a Lua filter to parse `#### Abstract` and `#### Author Summary` sections from your document body (not YAML). This provides better control over formatting and allows the abstract to span both columns in two-column mode.
+Use `#### Abstract` and `#### Author Summary` headers in the document body. Keywords are specified in YAML metadata and appear after the abstract.
 
-To control abstract placement:
+Control abstract column spanning:
 
 ```yaml
 format:
   biorxiv-pdf:
-    abstract-span: true   # Default: abstract spans both columns in two-column mode
-    # abstract-span: false  # Places abstract in left column only
+    abstract-span: false  # Place abstract in left column only
 ```
 
-Note: The `abstract` field in YAML is ignored in favor of the `#### Abstract` section in the document body.
+### Column Layout
 
-## Format Options
+Two-column layout (default):
 
-Three formats are available:
+```yaml
+format:
+  biorxiv-pdf: default
+```
 
-| Format | Description |
-|--------|-------------|
-| `biorxiv-pdf` | Two-column bioRxiv preprint style (default) |
-| `biorxiv-onecol` | Single-column bioRxiv preprint style (no line numbers) |
-| `biorxiv-submit` | Single-column submission style with line numbers |
-
-### Additional Class Options
-
-You can pass additional LaTeX class options:
+Single-column layout:
 
 ```yaml
 format:
   biorxiv-pdf:
-    classoption: [twocolumn, watermark]
+    classoption: [onecolumn]
 ```
 
-Available class options:
-
-| Option | Description |
-|--------|-------------|
-| `twocolumn` | Two-column layout (default for pdf format) |
-| `submit` | Single-column with line numbers (used by submit format) |
-| `watermark` | Adds DRAFT watermark to pages |
-| `rmabstract` | Non-bold abstract text |
-| `bibskip` | Add space between bibliography entries |
-
-### Footer Options
-
-The footer displays the lead author, bioRxiv logo, date, and page range by default. You can customize or hide these elements:
+Submission format with line numbers:
 
 ```yaml
----
-# Footer logo options
-footer-logo: biorxiv        # Default: shows bioRxiv logo
-footer-logo: "PREPRINT"     # Custom text instead of logo
-footer-logo: false          # Hide logo entirely
-
-# Footer date options  
-footer-date: true           # Default: shows today's date
-footer-date: "January 2026" # Custom date text
-footer-date: false          # Hide date entirely
----
+format:
+  biorxiv-submit: default
 ```
-
-## Features
-
-- Two-column bioRxiv preprint style
-- Single-column submission style with line numbers
-- Column-spanning figures with `fig-env="figure*"`
-- ORCID integration
-- Author affiliations with superscript numbering
-- Corresponding author indication (marked with ✉)
-- Keywords and abstract formatting
-- natbib citation support (author-year style)
-- bioRxiv logo in footer
-- Proper SI units support via siunitx
 
 ### Column-Spanning Figures
 
-In two-column mode, figures normally fit within a single column. To make a figure span both columns, add `fig-env="figure*"` to the figure attributes:
+Use the `fig-env` attribute for figures that span both columns:
 
 ```markdown
-![Your caption here](path/to/image.png){#fig-id fig-env="figure*"}
+![Caption text](image.png){#fig-id fig-env="figure*"}
 ```
 
-This attribute is LaTeX-specific and will be ignored when rendering to HTML or DOCX, so your document remains compatible with all output formats.
+This attribute is LaTeX-specific and ignored by HTML/DOCX formats.
+
+### Footer Customization
+
+Customize or hide footer elements:
+
+```yaml
+---
+footer-logo: biorxiv        # Default: bioRxiv logo
+footer-logo: "PREPRINT"     # Custom text
+footer-logo: false          # Hide logo
+
+footer-date: true           # Default: today's date
+footer-date: "January 2026" # Custom date
+footer-date: false          # Hide date
+---
+```
+
+### Class Options
+
+```yaml
+format:
+  biorxiv-pdf:
+    classoption: [onecolumn, watermark]
+```
+
+Available options:
+
+| Option | Description |
+|--------|-------------|
+| `twocolumn` | Two-column layout (default) |
+| `onecolumn` | Single-column layout |
+| `submit` | Submission mode with line numbers |
+| `watermark` | DRAFT watermark on pages |
+| `rmabstract` | Non-bold abstract text |
+| `bibskip` | Spacing between bibliography entries |
 
 ## Template Files
 
-- `template.qmd` - Example manuscript document with all options documented
+The extension includes:
+
+- `template.qmd` - Example manuscript
 - `references.bib` - Example bibliography
-- `Figures/` - Place figures here
+- `Figures/` - Directory for figures
 
 ## Credits
 
-This Quarto extension is a port of the [quantixed/manuscript-templates](https://github.com/quantixed/manuscript-templates) LaTeX template, which was originally forked from RoyleLab-StyleBioRxiv and zHenriquesLab-StyleBioRxiv.
+This Quarto extension ports the LaTeX template from [quantixed/manuscript-templates](https://github.com/quantixed/manuscript-templates), originally forked from RoyleLab-StyleBioRxiv and zHenriquesLab-StyleBioRxiv.
 
 ## License
 
-This project is licensed under the same terms as the original manuscript-templates repository.
+GPL-3.0
