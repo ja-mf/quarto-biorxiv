@@ -1,0 +1,14 @@
+# Quarto output and temp files
+*.pdf
+*.tex
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+
+# Extension files that should only exist in _extensions/
+bioRxiv.cls
+bioRxiv_logo.png
+bxvabbrvnat.bst
+orcidlink.sty

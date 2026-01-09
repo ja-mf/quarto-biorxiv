@@ -1,0 +1,4 @@
+# Files and folders excluded from `quarto use template` bundle
+# These are useful for development but not needed in user projects
+examples
+preview
