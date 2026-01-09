@@ -12,6 +12,44 @@
 \renewcommand\Authands{, and }
 \makeatother
 
+% Footer customization options
+% These can be set via YAML: show-logo: false, show-date: false
+\newif\ifshowlogo
+\newif\ifshowdate
+\showlogotrue  % default: show logo
+\showdatetrue  % default: show date
+
+% Override footer definitions to respect show-logo and show-date options
+\makeatletter
+\AtBeginDocument{%
+  % Redefine footer macros with conditional logo and date
+  \def\@footerlogo{\ifshowlogo\includegraphics[width=1cm, trim=0 1.5cm 0 0]{bioRxiv_logo}\hspace{7pt}|\hspace{7pt}\fi}%
+  \def\@footerdate{\ifshowdate\today\hspace{7pt}|\hspace{7pt}\fi}%
+  %
+  % First page footer (right side)
+  \if@submit
+    \def\aBioRXiv{{\footnotesize
+      \footerfont \@leadauthor\ifnum \value{authors} > 2\hspace{2pt}\textit{et al.}\fi\hspace{7pt}|\hspace{7pt}\@footerdate\thepage\textendash\pageref{LastPage}
+    }}
+  \else
+    \def\aBioRXiv{{\footnotesize
+      \footerfont \@leadauthor\ifnum \value{authors} > 2\hspace{2pt}\textit{et al.}\fi\hspace{7pt}|\hspace{7pt}\@footerlogo\@footerdate\thepage\textendash\pageref{LastPage}
+    }}
+  \fi
+  %
+  % Subsequent pages footer (right side, non-first pages)
+  \if@submit
+    \rfoot[\dAuthor]{{\footnotesize
+      \footerfont \@footerdate\thepage\textendash\pageref{LastPage}
+    }}
+  \else
+    \rfoot[\dAuthor]{{\footnotesize
+      \footerfont \@footerlogo\@footerdate\thepage\textendash\pageref{LastPage}
+    }}
+  \fi
+}
+\makeatother
+
 % Abstract spanning environment for two-column mode
 \makeatletter
 \newenvironment{abstractspan}{%

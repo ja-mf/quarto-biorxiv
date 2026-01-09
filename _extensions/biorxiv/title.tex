@@ -15,6 +15,15 @@ $endif$
 $endfor$
 $endif$
 
+% Footer options (default: show both logo and date)
+% Use show-logo: false or show-date: false in YAML to hide them
+$if(hide-logo)$
+\showlogofalse
+$endif$
+$if(hide-date)$
+\showdatefalse
+$endif$
+
 $if(title)$
 \title{$title$}
 $endif$

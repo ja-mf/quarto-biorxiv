@@ -110,6 +110,17 @@ Available class options:
 | `rmabstract` | Non-bold abstract text |
 | `bibskip` | Add space between bibliography entries |
 
+### Footer Options
+
+The footer displays the lead author, bioRxiv logo, date, and page range by default. You can hide the logo or date:
+
+```yaml
+format:
+  biorxiv-pdf:
+    hide-logo: true   # Hides the bioRxiv logo from the footer
+    hide-date: true   # Hides the date from the footer
+```
+
 ## Features
 
 - Two-column bioRxiv preprint style
